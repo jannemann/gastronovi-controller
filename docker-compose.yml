@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  gastronovi-controller:
+    image: gastronovi-controller:latest
+    build:
+      context: ./.
+      dockerfile: ./dockerfile
+    environment:
+      - JAVA_OPTS=-Xmx512m
+    ports:
+      - "6767:6767" #local server unsecure
+      - "6768:6768" #local server secure old
+      - "6769:6769" #local server secure new
+    cap_drop: ["ALL"]
+    hostname: gastronovi-controller
+    restart: always #even when docker host restarts
